@@ -9,14 +9,12 @@ class TreeNode
     protected $uid;
     protected $lft;
     protected $rgt;
-    protected $level;
+    protected $depth;
     
     public $data;
     protected $parent;   // TreeNode
     protected $children; // TreeNodeList : Array<TreeNode>
-    protected $root;     // TreeNode
-        
-    protected $rootUid;
+    protected $root;     // Tree
     
     /**
      * 
@@ -40,6 +38,7 @@ class TreeNode
         $root->addNode($this);
         $child->setParent($this);
         $child->setRoot($root);
+        $child->setDepth($this->depth + 1);
         $this->children[] = $child;
         
         return $child;
@@ -86,42 +85,6 @@ class TreeNode
     
     /**
      * 
-     * @param type $rootUid
-     * @param type $lft
-     * @param type $rgt
-     */
-    protected function updateNodes($rootUid, $lft)
-    {
-        $nodes = $this->nodes[$rootUid];
-        foreach ($nodes as $node) {
-            if ($node->getRgt() >= $lft) {
-                $node->setRgt($node->getRgt() + 2);
-            }
-            if ($node->getLft() > $lft) {
-                $node->setLft($node->getLft() + 2);
-            }
-        }
-    }
-    
-    
-    /**
-     * 
-     * @param int $level
-     * @param int $lft
-     * @param int $rgt
-     * @param int $uid
-     */
-    public function setNodeProperties($level, $lft, $rgt, $uid, $isRoot = false)
-    {
-        $this->level  = $level;
-        $this->lft    = $lft;
-        $this->rgt    = $rgt;
-        $this->uid    = $uid;
-        $this->isRoot = $isRoot;
-    }
-    
-    /**
-     * 
      * @return type
      */
     public function getUid()
@@ -129,9 +92,22 @@ class TreeNode
         return $this->uid;
     }
     
-    public function getLevel()
+    /**
+     * 
+     * @return int
+     */
+    public function getDepth()
     {
-        return $this->level;
+        return $this->depth;
+    }
+    
+    /**
+     * 
+     * @param int $depth
+     */
+    public function setDepth($depth)
+    {
+        $this->depth = $depth;
     }
 
     /**
@@ -169,7 +145,32 @@ class TreeNode
     {
         $this->rgt = $rgt;
     }
-
+    
+    /**
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        ob_start();
+        $this->toString();
+        $output = ob_get_clean();
+        
+        return $output;
+    }
+    
+    /**
+     * 
+     */
+    protected function toString()
+    {
+        $spaces = str_repeat('-', $this->depth);
+        echo "$spaces{$this->data} [{$this->depth}]: {$this->lft} {$this->rgt}<br/>\n";
+        foreach ($this->children as $child) {
+            $child->toString();
+        }
+    }
+       
     /**
      * Recursively sets lft and rgt values for each node.
      */
@@ -189,6 +190,5 @@ class TreeNode
             $child->save();
             $this->rgt = $child->rgt + 1;
         }
-        echo "{$this->data}: {$this->lft} {$this->rgt}<br/>";
     }
 }

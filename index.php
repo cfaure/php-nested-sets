@@ -11,5 +11,6 @@ $b2   = $a->addChild(new TreeNode('B2'));
 $c    = $root->addChild(new TreeNode('C'));
 $d1   = $c->addChild(new TreeNode('D1'));
 
-echo $root->save();
-var_dump($root->getNumNodes());
+$root->save();
+echo $a;
+echo $root->getNumNodes()." nodes";

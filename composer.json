@@ -15,9 +15,8 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2",
-        "symfony/console": "~2",
-        "phpunit/phpunit": "~4.4"
+        "codeception/codeception": "^2.1",
+        "symfony/console": "~2"
     },
     "autoload": {
         "psr-4": {

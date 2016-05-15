@@ -6,23 +6,9 @@ namespace PhpNestedSets;
  */
 class Tree extends TreeNode
 {
-    protected $roots     = array();
-    protected $nodes     = array();
     protected $globalUid = 1;
-    
-//    public function __construct($node)
-//    {
-//        $this = $node;
-//        $this->parent = null;
-//        //$uid = $this->autoinc();
-//        //$root->setNodeProperties(0, 1, 2, $uid, true);
-//        //$this->setRoot($uid);
-//        //$this->roots[$uid] = $root;
-//        //$this->nodes[$uid] = array();
-//        
-//        return $this;
-//    }
-    
+    protected $nodes     = array();
+        
     /**
      * 
      * @param type $data
@@ -31,10 +17,10 @@ class Tree extends TreeNode
     {
         parent::__construct($data);
         $this->parent = null;
-        $this->lft   = 1;
-        $this->rgt   = 2;
-        $this->level = 0;
-        $this->nodes = array();
+        $this->lft    = 1;
+        $this->rgt    = 2;
+        $this->depth  = 0;
+        $this->nodes  = array();
         $this->setRoot($this);
         $this->addNode($this);
     }

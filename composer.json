@@ -1,0 +1,27 @@
+{
+    "name": "php-nested-sets/php-nested-sets",
+    "description": "The PHP Nested Sets library (php-nested-sets) is intended to make...",
+    "type":  "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Clément Fauré",
+            "email": "clement.faure@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2",
+        "symfony/console": "~2",
+        "phpunit/phpunit": "~4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpNestedSets\\": "src/"
+        }
+    }
+}

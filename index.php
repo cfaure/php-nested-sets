@@ -1,11 +1,15 @@
 <?php
-require './autoload.php';
+require './vendor/autoload.php';
 
-use Psi\NestedSets\Tree as Tree;
-use Psi\NestedSets\Node as Node;
+use PhpNestedSets\Tree;
+use PhpNestedSets\TreeNode;
 
-$tree = new Tree();
-$root = $tree->addRoot(new Node(array('prop1' => 1, 'prop2' => 2)));
-$tree->addNode($root, new Node(array('prop1' => 11, 'prop2' => 22)));
+$root = new Tree('Root');
+$a    = $root->addChild(new TreeNode('A'));
+$b1   = $a->addChild(new TreeNode('B1'));
+$b2   = $a->addChild(new TreeNode('B2'));
+$c    = $root->addChild(new TreeNode('C'));
+$d1   = $c->addChild(new TreeNode('D1'));
 
-echo $tree;
+echo $root->save();
+var_dump($root->getNumNodes());
